@@ -1,0 +1,69 @@
+16:713  8:301  Found UEFI Acpi 2.0 RSDP at 5bc0d014
+16:713  0:000  Saving ACPI tables from RSDP 5bc0d014 to ACPI\origin ...
+16:713  0:000   5bc0d014: 'RSD PTR ', Rev: 2 (Acpi 2.0 or newer), Len: 36 -> RSDP.aml
+16:719  0:006    (Xsdt: 5bbbd188, Rsdt: 5bbbd0c4)
+16:719  0:000    5bbbd188: 'XSDT', 'H2O BIOS', Rev: 1, Len: 196 -> XSDT.aml
+16:722  0:003    5bbbd0c4: 'RSDT', 'H2O BIOS', Rev: 1, Len: 116 -> RSDT.aml
+16:724  0:002    Tables in Xsdt: 20
+16:724  0:000    0. 5bbf9000: 'FACP', 'H2O BIOS', Rev: 5, Len: 268 -> FACP.aml
+16:727  0:002        (Dsdt: 5BBC4000, Facs: 5BB0C000, XDsdt: 5bbc4000, XFacs: 0)
+16:727  0:000        5bbc4000: 'DSDT', 'SKL', Rev: 2, Len: 202426 -> DSDT.aml
+16:737  0:009        5bb0c000: 'FACS', Ver: 2, Len: 64 -> FACS.aml
+16:739  0:002    1. 5bc0c000: 'UEFI', 'H2O BIOS', Rev: 1, Len: 566 -> UEFI.aml
+16:741  0:002    2. 5bc0a000: 'SSDT', 'CpuSsdt', Rev: 2, Len: 6940 -> SSDT-0-CpuSsdt.aml (Found hidden SSDT 9 pcs)
+16:744  0:002        * 1531129880: 'SSDT', 'Cpu0Ist', Rev: 2, Len: 1409  53 53 44 54 81 05 00 00 02 42 50 6D 52 65 66 00 Internal length = 1409 -> SSDT-x0_0-Cpu0Ist.aml
+16:746  0:002        * 1531131544: 'SSDT', 'ApIst', Rev: 2, Len: 1532  53 53 44 54 FC 05 00 00 02 29 50 6D 52 65 66 00 Internal length = 1532 -> SSDT-x0_1-ApIst.aml
+16:748  0:002        * 1531121688: 'SSDT', 'Cpu0Cst', Rev: 2, Len: 1024  53 53 44 54 00 04 00 00 02 DF 50 6D 52 65 66 00 Internal length = 1024 -> SSDT-x0_2-Cpu0Cst.aml
+16:751  0:002        * 1531561368: 'SSDT', 'ApCst', Rev: 2, Len: 778  53 53 44 54 0A 03 00 00 02 EF 50 6D 52 65 66 00 Internal length = 778 -> SSDT-x0_3-ApCst.aml
+16:753  0:002        * 1250012824: 'SSDT', 'Cpu0Hwp', Rev: 2, Len: 283  53 53 44 54 1B 01 00 00 02 67 50 6D 52 65 66 00 Internal length = 283 -> SSDT-x0_4-Cpu0Hwp.aml
+16:756  0:002        * 1250024216: 'SSDT', 'ApHwp', Rev: 2, Len: 791  53 53 44 54 17 03 00 00 02 E9 50 6D 52 65 66 00 Internal length = 791 -> SSDT-x0_5-ApHwp.aml
+16:760  0:003        * 1249951768: 'SSDT', 'HwpLvt', Rev: 2, Len: 1828  53 53 44 54 24 07 00 00 02 D0 50 6D 52 65 66 00 Internal length = 1828 -> SSDT-x0_6-HwpLvt.aml
+16:763  0:003        * 1531562392: 'SSDT', 'Cpu0Psd', Rev: 2, Len: 244  53 53 44 54 F4 00 00 00 02 3D 50 6D 52 65 66 00 Internal length = 244 -> SSDT-x0_7-Cpu0Psd.aml
+16:766  0:002        * 1531125784: 'SSDT', 'ApPsd', Rev: 2, Len: 2736  53 53 44 54 B0 0A 00 00 02 B1 50 6D 52 65 66 00 Internal length = 2736 -> SSDT-x0_8-ApPsd.aml
+16:769  0:002  
+16:769  0:000    3. 5bc06000: 'SSDT', 'SaSsdt', Rev: 2, Len: 13746 -> SSDT-1-SaSsdt.aml
+16:771  0:002    4. 5bc04000: 'SSDT', 'PegSsdt', Rev: 2, Len: 6273 -> SSDT-2-PegSsdt.aml
+16:774  0:002    5. 5bc03000: 'UEFI', 'CFL', Rev: 1, Len: 66 -> UEFI.aml
+16:776  0:002    6. 5bc02000: 'MSDM', 'H2O BIOS', Rev: 3, Len: 85 -> MSDM.aml
+16:779  0:002    7. 5bc01000: 'LPIT', 'CFL', Rev: 1, Len: 148 -> LPIT.aml
+16:781  0:002    8. 5bc00000: 'WSMT', 'CFL', Rev: 1, Len: 40 -> WSMT.aml
+16:783  0:002    9. 5bbfe000: 'SSDT', 'PtidDevc', Rev: 2, Len: 5738 -> SSDT-3-PtidDevc.aml
+16:786  0:002    10. 5bbfd000: 'DBGP', '', Rev: 1, Len: 52 -> DBGP.aml
+16:789  0:002    11. 5bbfc000: 'DBG2', '', Rev: 0, Len: 97 -> DBG2.aml
+16:791  0:002    12. 5bbfb000: 'SSDT', 'PerfTune', Rev: 2, Len: 1092 -> SSDT-4-PerfTune.aml
+16:793  0:002    13. 5bbfa000: 'ASF!', 'H2O BIOS', Rev: 32, Len: 165 -> ASF!.aml
+16:796  0:002    14. 5bbf8000: 'HPET', 'H2O BIOS', Rev: 1, Len: 56 -> HPET.aml
+16:798  0:002    15. 5bbf7000: 'APIC', 'H2O BIOS', Rev: 3, Len: 300 -> APIC.aml
+16:801  0:002    16. 5bbf6000: 'MCFG', 'H2O BIOS', Rev: 1, Len: 60 -> MCFG.aml
+16:803  0:002    17. 5bbc0000: 'SSDT', 'NvdTable', Rev: 1, Len: 13957 -> SSDT-5-NvdTable.aml
+16:805  0:002    18. 5bbbe000: 'FPDT', 'CFL', Rev: 1, Len: 68 -> FPDT.aml
+16:808  0:002    19. 5bbbf000: 'BGRT', 'H2O BIOS', Rev: 1, Len: 56 -> BGRT.aml
+16:810  0:002  Found UEFI Acpi 1.0 RSDP at 5bc0d000
+16:810  0:000  Printing ACPI tables from RSDP 5bc0d000 ...
+16:810  0:000   5bc0d000: 'RSD PTR ', Rev: 0 (Acpi 1.0), Len: 20
+16:810  0:000    (Rsdt: 5bbbd000)
+16:810  0:000    5bbbd000: 'RSDT', 'H2O BIOS', Rev: 1, Len: 116
+16:810  0:000    Tables in Rsdt: 20
+16:810  0:000    0. 5bbf9000: 'FACP', 'H2O BIOS', Rev: 5, Len: 268
+16:810  0:000        (Dsdt: 5BBC4000, Facs: 5BB0C000, XDsdt: 5bbc4000, XFacs: 0)
+16:810  0:000        5bbc4000: 'DSDT', 'SKL', Rev: 2, Len: 202426
+16:816  0:005        5bb0c000: 'FACS', Ver: 2, Len: 64
+16:816  0:000    1. 5bc0c000: 'UEFI', 'H2O BIOS', Rev: 1, Len: 566
+16:816  0:000    2. 5bc0a000: 'SSDT', 'CpuSsdt', Rev: 2, Len: 6940
+16:816  0:000    3. 5bc06000: 'SSDT', 'SaSsdt', Rev: 2, Len: 13746
+16:816  0:000    4. 5bc04000: 'SSDT', 'PegSsdt', Rev: 2, Len: 6273
+16:816  0:000    5. 5bc03000: 'UEFI', 'CFL', Rev: 1, Len: 66
+16:816  0:000    6. 5bc02000: 'MSDM', 'H2O BIOS', Rev: 3, Len: 85
+16:816  0:000    7. 5bc01000: 'LPIT', 'CFL', Rev: 1, Len: 148
+16:816  0:000    8. 5bc00000: 'WSMT', 'CFL', Rev: 1, Len: 40
+16:816  0:000    9. 5bbfe000: 'SSDT', 'PtidDevc', Rev: 2, Len: 5738
+16:816  0:000    10. 5bbfd000: 'DBGP', '', Rev: 1, Len: 52
+16:816  0:000    11. 5bbfc000: 'DBG2', '', Rev: 0, Len: 97
+16:816  0:000    12. 5bbfb000: 'SSDT', 'PerfTune', Rev: 2, Len: 1092
+16:816  0:000    13. 5bbfa000: 'ASF!', 'H2O BIOS', Rev: 32, Len: 165
+16:816  0:000    14. 5bbf8000: 'HPET', 'H2O BIOS', Rev: 1, Len: 56
+16:816  0:000    15. 5bbf7000: 'APIC', 'H2O BIOS', Rev: 3, Len: 300
+16:816  0:000    16. 5bbf6000: 'MCFG', 'H2O BIOS', Rev: 1, Len: 60
+16:816  0:000    17. 5bbc0000: 'SSDT', 'NvdTable', Rev: 1, Len: 13957
+16:816  0:000    18. 5bbbe000: 'FPDT', 'CFL', Rev: 1, Len: 68
+16:816  0:000    19. 5bbbf000: 'BGRT', 'H2O BIOS', Rev: 1, Len: 56
