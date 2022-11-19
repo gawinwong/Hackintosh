@@ -1,0 +1,9 @@
+[    7.011716] snd_hda_codec_realtek hdaudioC0D0: autoconfig for ALC1220: line_outs=1 (0x1a/0x0/0x0/0x0/0x0) type:speaker
+[    7.011718] snd_hda_codec_realtek hdaudioC0D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)
+[    7.011719] snd_hda_codec_realtek hdaudioC0D0:    hp_outs=1 (0x14/0x0/0x0/0x0/0x0)
+[    7.011720] snd_hda_codec_realtek hdaudioC0D0:    mono: mono_out=0x0
+[    7.011720] snd_hda_codec_realtek hdaudioC0D0:    dig-out=0x1e/0x0
+[    7.011721] snd_hda_codec_realtek hdaudioC0D0:    inputs:
+[    7.011722] snd_hda_codec_realtek hdaudioC0D0:      Mic=0x18
+[    7.011722] snd_hda_codec_realtek hdaudioC0D0:      Headset Mic=0x19
+[    7.011723] snd_hda_codec_realtek hdaudioC0D0:      Internal Mic=0x12

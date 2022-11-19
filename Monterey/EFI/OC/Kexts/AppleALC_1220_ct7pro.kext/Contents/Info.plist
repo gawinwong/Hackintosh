@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>20G918</string>
+	<string>21G217</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7.6</string>
+	<string>1.7.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,23 +25,23 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.7.6</string>
+	<string>1.7.7</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>13C100</string>
+	<string>14B47b</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>12.1</string>
+	<string>13.0</string>
 	<key>DTSDKBuild</key>
-	<string>21C46</string>
+	<string>22A372</string>
 	<key>DTSDKName</key>
-	<string>macosx12.1</string>
+	<string>macosx13.0</string>
 	<key>DTXcode</key>
-	<string>1321</string>
+	<string>1410</string>
 	<key>DTXcodeBuild</key>
-	<string>13C100</string>
+	<string>14B47b</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>ALCUserClientProvider</key>
@@ -71,26 +71,26 @@
 					AwAAAA==
 					</data>
 					<key>Codec</key>
-					<string>Custom ALC282 Lenovo-IdeaPad-Z510 by hoseinrez</string>
+					<string>Custom ALC1220 For Hasee Z7-CT7Pro</string>
 					<key>CodecID</key>
-					<integer>283902594</integer>
+					<integer>283906592</integer>
 					<key>ConfigData</key>
 					<data>
-					ASccEAEnHQEBJx6mAScfkAFHHCABRx0BAUce
-					FwFHH5ABRwwCAXcc8AF3HQABdx4AAXcfQAGH
-					HPABhx0AAYceAAGHH0ABpxzwAacdAAGnHgAB
-					px9AAbcc8AG3HQABtx4AAbcfQAHXHPAB1x0A
-					AdceAAHXH0AB5xzwAecdAAHnHgAB5x9AAZcc
-					MAGXHRABlx6BAZcfBAIXHEACFx0QAhceIQIX
-					HwQ=
+					ASccQAEnHQEBJx6jAScfkAFHHCABRx0QAUce
+					IQFHHwQBRwwCAVccAAFXHQABVx4AAVcfQAFn
+					HPABZx0RAWceEQFnH0EBdxzwAXcdEQF3HhEB
+					dx9BAYccUAGHHRABhx6hAYcfBAGXHPABlx0Q
+					AZceEQGXHwEBpxwQAacdAQGnHhMBpx+QAbcc
+					8AG3HREBtx4RAbcfQQG3DAIB1xwtAdcdtQHX
+					HrgB1x9AAeccMAHnHREB5x5FAecfBA==
 					</data>
 					<key>FuncGroup</key>
 					<integer>1</integer>
 					<key>LayoutID</key>
-					<integer>69</integer>
+					<integer>52</integer>
 					<key>WakeConfigData</key>
 					<data>
-					AUcMAg==
+					AUcMAgG3DAI=
 					</data>
 					<key>WakeVerbReinit</key>
 					<true/>
