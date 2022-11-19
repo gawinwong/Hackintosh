@@ -7,12 +7,12 @@
 首先感谢`B站up主@乌龙蜜桃来一打`，[他的视频][1]提供了诸多解决思路。我们这里使用的是modGRUBShell.efi而不是RU.efi
 
 ### 2. 准备bios文件
-神舟的bios有专门的网站维护，可以去[这里][2]下载
+神舟的bios有专门的网站维护，可以去[这里][2]下载<br>
 下载后解压，文件比较大且后缀名比较奇怪的就是我们需要的bios文件
 
 ### 3. 下载工具包
-使用远景论坛`用户@emyself`提供的工具[set_dump][3]，用于从bios中找到我们需要的地址
-也可以使用上面up主整理的[工具合集][4]
+使用远景论坛`用户@emyself`提供的工具[set_dump][3]，用于从bios中找到我们需要的地址<br>
+也可以使用上面up主整理的[工具合集][4]<br>
 下载[modGRUBShell.efi][7]
 
 ### 4. 找出需要的地址
@@ -32,8 +32,8 @@ setup_var_cv SaSetup 0x107 0x01 0x02
 setup_var_cv SaSetup 0x108 0x01 0x03
 ```
 
-- 按下`Ctrl+Alt+Delete`重启进入OC引导界面，点击`VerifyMsrE2.efi`
-如果是`This firmware has UNLOCKED MSR OXE2 register!`说明解锁成功
+- 按下`Ctrl+Alt+Delete`重启进入OC引导界面，点击`VerifyMsrE2.efi`<br>
+如果是`This firmware has UNLOCKED MSR OXE2 register!`说明解锁成功<br>
 如果是`This firmware has LOCKED MSR OXE2 register!`则是没有解锁
 
 
