@@ -22,7 +22,7 @@
 ![](../Images/set_dump2.png)
 
 ### 5. 正式解锁
-- 一般情况下，CFG LOCK的VarStore位于0x03，即CpuSetup，DVMT位于0x02，即SaSetup。
+- 一般情况下，CFG LOCK的VarStore位于0x03，即CpuSetup，DVMT位于0x02，即SaSetup
 不过最好还是自己确认下，参考指南，[使用UEFITool和IFR-Extractor][6]，获取bios的详情数据
 
 - 重启进入OC引导界面，点击`modGRUBShell.efi`，根据上面得到的地址输入以下命令，跟在0x3E后面的0x01代表修改一个字节
