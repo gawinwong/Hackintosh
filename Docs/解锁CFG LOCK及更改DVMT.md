@@ -4,7 +4,7 @@
 可以先参考opencore指南，把[解锁CFG LOCK][5]的过程看一遍
 
 ### 1. 主要参考
-首先感谢`B站up主@乌龙蜜桃来一打`，[他的视频][1]提供了诸多解决思路。我们这里使用的是modGRUBShell.efi而不是RU.efi
+首先感谢`B站up主@乌龙蜜桃来一打`，[他的视频][1]提供了诸多解决思路。我们这里使用的是`modGRUBShell.efi`而不是`RU.efi`
 
 ### 2. 准备bios文件
 神舟的bios有专门的网站维护，可以去[这里][2]下载<br>
@@ -22,7 +22,7 @@
 ![](../Images/set_dump2.png)
 
 ### 5. 正式解锁
-- 一般情况下，CFG LOCK的VarStore位于0x03，即CpuSetup，DVMT位于0x02，即SaSetup
+- 一般情况下，CFG LOCK的VarStore位于0x03，即CpuSetup，DVMT位于0x02，即SaSetup<br>
 不过最好还是自己确认下，参考指南，[使用UEFITool和IFR-Extractor][6]，获取bios的详情数据
 
 - 重启进入OC引导界面，点击`modGRUBShell.efi`，根据上面得到的地址输入以下命令，跟在0x3E后面的0x01代表修改一个字节
