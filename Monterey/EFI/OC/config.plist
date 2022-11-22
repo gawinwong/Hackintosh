@@ -30,14 +30,6 @@
                     <key>Enabled</key>
                     <true/>
                     <key>Path</key>
-                    <string>SSDT-PLUG.aml</string>
-                </dict>
-                <dict>
-                    <key>Comment</key>
-                    <string></string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
                     <string>SSDT-PMC.aml</string>
                 </dict>
                 <dict>
@@ -525,24 +517,6 @@
                     <key>Arch</key>
                     <string>Any</string>
                     <key>BundlePath</key>
-                    <string>ECEnabler.kext</string>
-                    <key>Comment</key>
-                    <string>V1.0.3</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>ExecutablePath</key>
-                    <string>Contents/MacOS/ECEnabler</string>
-                    <key>MaxKernel</key>
-                    <string></string>
-                    <key>MinKernel</key>
-                    <string></string>
-                    <key>PlistPath</key>
-                    <string>Contents/Info.plist</string>
-                </dict>
-                <dict>
-                    <key>Arch</key>
-                    <string>Any</string>
-                    <key>BundlePath</key>
                     <string>SMCBatteryManager.kext</string>
                     <key>Comment</key>
                     <string>V1.3.0</string>
@@ -659,7 +633,7 @@
                 <key>PickerMode</key>
                 <string>External</string>
                 <key>PickerVariant</key>
-                <string>Auto</string>
+                <string>gawin\got</string>
                 <key>PollAppleHotKeys</key>
                 <true/>
                 <key>ShowPicker</key>
@@ -689,7 +663,44 @@
                 <integer>3</integer>
             </dict>
             <key>Entries</key>
-            <array/>
+            <array>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>win10</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Windows10:Windows</string>
+                    <key>Name</key>
+                    <string>Win10</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\Microsoft\Boot\bootmgfw.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>ubuntu</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Ubuntu:Linux</string>
+                    <key>Name</key>
+                    <string>Ubuntu</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\ubuntu\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+            </array>
             <key>Security</key>
             <dict>
                 <key>AllowSetDefault</key>
@@ -713,9 +724,9 @@
                 <key>PasswordSalt</key>
                 <data></data>
                 <key>ScanPolicy</key>
-                <integer>0</integer>
+                <integer>2693891</integer>
                 <key>SecureBootModel</key>
-                <string>Default</string>
+                <string>Disabled</string>
                 <key>Vault</key>
                 <string>Optional</string>
             </dict>
