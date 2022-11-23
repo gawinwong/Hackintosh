@@ -521,7 +521,7 @@
                     <key>Comment</key>
                     <string>V1.3.0</string>
                     <key>Enabled</key>
-                    <true/>
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/SMCBatteryManager</string>
                     <key>MaxKernel</key>
@@ -676,7 +676,7 @@
                     <key>Flavour</key>
                     <string>Windows10:Windows</string>
                     <key>Name</key>
-                    <string>Win10</string>
+                    <string>win</string>
                     <key>Path</key>
                     <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\Microsoft\Boot\bootmgfw.efi</string>
                     <key>TextMode</key>
@@ -694,9 +694,99 @@
                     <key>Flavour</key>
                     <string>Ubuntu:Linux</string>
                     <key>Name</key>
-                    <string>Ubuntu</string>
+                    <string>ubuntu</string>
                     <key>Path</key>
                     <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\ubuntu\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>debian</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Debian:Linux</string>
+                    <key>Name</key>
+                    <string>debian</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\debian\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>deepin</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Deepin:Linux</string>
+                    <key>Name</key>
+                    <string>deepin</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\deepin\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>fedora</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Fedora:Linux</string>
+                    <key>Name</key>
+                    <string>fedora</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\fedora\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>gentoo</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Gentoo:Linux</string>
+                    <key>Name</key>
+                    <string>gentoo</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\gentoo\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>centos</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Centos:Linux</string>
+                    <key>Name</key>
+                    <string>centos</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\centos\grubx64.efi</string>
                     <key>TextMode</key>
                     <false/>
                 </dict>
