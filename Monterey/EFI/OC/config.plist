@@ -790,6 +790,60 @@
                     <key>TextMode</key>
                     <false/>
                 </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>redhat</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Redhat:Linux</string>
+                    <key>Name</key>
+                    <string>redhat</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\redhat\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>manjaro</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Manjaro:Linux</string>
+                    <key>Name</key>
+                    <string>manjaro</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\manjaro\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string>arch</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Flavour</key>
+                    <string>Arch:Linux</string>
+                    <key>Name</key>
+                    <string>arch</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x1D,0x0)/Pci(0x0,0x0)/NVMe(0x1,00-00-00-00-00-00-00-00)/HD(2,GPT,0F1DAEB6-1C1A-4914-ACBB-7D8A782A158E,0x73000,0xC8000)/\EFI\arch\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
             </array>
             <key>Security</key>
             <dict>
