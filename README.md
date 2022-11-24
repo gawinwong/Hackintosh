@@ -16,6 +16,7 @@
 |声卡|Realtek ALC1220|
 |硬盘|Hikvision C2000 Pro 2T * 2|
 
+![](./Images/theme.png)
 #### 目前状态:
 - [x] 驱动核显
 - [x] 驱动声卡
