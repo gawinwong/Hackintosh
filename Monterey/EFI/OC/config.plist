@@ -872,7 +872,7 @@
                 <key>ScanPolicy</key>
                 <integer>2693891</integer>
                 <key>SecureBootModel</key>
-                <string>Disabled</string>
+                <string>j215</string>
                 <key>Vault</key>
                 <string>Optional</string>
             </dict>
