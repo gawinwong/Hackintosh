@@ -1,0 +1,40 @@
+name: Build Tahoe EFI
+on:
+  push:
+    paths:
+      - 'scripts/tahoe/**'
+      - '.github/workflows/tahoe-efi.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build firmware and validate OpenCore
+        run: python3 scripts/tahoe/build_tahoe.py
+      - name: Package EFI
+        run: |
+          mkdir -p "$RUNNER_TEMP/tahoe-artifacts"
+          ditto -c -k --keepParent Tahoe/EFI-install "$RUNNER_TEMP/tahoe-artifacts/EFI-install.zip"
+          ditto -c -k --keepParent Tahoe/EFI-nvidia "$RUNNER_TEMP/tahoe-artifacts/EFI-nvidia.zip"
+          cp Tahoe/DRIVER-VERSIONS.json "$RUNNER_TEMP/tahoe-artifacts/"
+          cd "$RUNNER_TEMP/tahoe-artifacts"
+          shasum -a 256 *.zip > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tahoe-Z7-CT7PRO-experimental
+          path: ${{ runner.temp }}/tahoe-artifacts/
+          if-no-files-found: error
+      - name: Commit validated EFI binaries
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Tahoe/EFI-install Tahoe/EFI-nvidia Tahoe/DRIVER-VERSIONS.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Hackintosh：更新 Tahoe 26 EFI OpenCore 和 Kext'
+            git push origin HEAD:main
+          fi
