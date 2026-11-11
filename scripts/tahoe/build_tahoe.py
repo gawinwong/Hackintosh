@@ -22,7 +22,12 @@ ordered=["Lilu","VirtualSMC","SMCBatteryManager","SMCProcessor","SMCSuperIO",
 "AirportItlwm","AMFIPass"]
 versions={}
 def request(url):
-    return urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"Tahoe-EFI-builder"}),timeout=180)
+    headers={"User-Agent":"Tahoe-EFI-builder"}
+    if url.startswith("https://api.github.com/"):
+        import os
+        token=os.environ.get("GITHUB_TOKEN","")
+        if token: headers["Authorization"]="Bearer "+token
+    return urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=180)
 def loadjson(url):
     with request(url) as f:return json.load(f)
 def download(url,p):
