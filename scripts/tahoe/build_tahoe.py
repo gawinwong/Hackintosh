@@ -121,6 +121,8 @@ def main():
                 if src.name=="AMFIPass.kext" and not post:continue
                 shutil.copytree(src,oc/"Kexts"/src.name)
             cfg=sync(orig,sample)
+            # Old public repository has an invalid SystemUUID; leave blank for user to regenerate privately.
+            cfg["PlatformInfo"]["Generic"]["SystemUUID"]=""
             for a in cfg["ACPI"]["Add"]:
                 if a["Path"]=="SSDT-DGPU.aml":a["Enabled"]=False
             cfg["DeviceProperties"]["Add"].get("PciRoot(0x0)/Pci(0x2,0x0)",{}).pop("disable-external-gpu",None)
