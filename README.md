@@ -8,7 +8,9 @@
 |主板|Notebook PB50_70RFRDRC|
 |BIOS|1.07.13THZX1|
 |芯片组|Coffee Lake HM370|
-|显卡|Intel UHD 630+GTX1660ti|
+|显卡|Intel UHD 630 + NVIDIA GTX 1660 Ti|
+|内屏显示|内屏日常由 Intel UHD 630 负责显示；支持切换为 NVIDIA GTX 1660 Ti 渲染（尚未确认是否有硬件 MUX 独显直连）|
+|外接视频接口|全部连接 NVIDIA GTX 1660 Ti 独显|
 |内存|Samsung 32G+32G 2666MHz|
 |屏幕|Samsung 4k Oled|
 |触摸板|Touchpad I2C|

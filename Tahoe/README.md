@@ -5,6 +5,14 @@
 ## 实际硬件
 神舟战神 Z7-CT7PRO（PB50_70RFRDRC），Intel Core i7-9750H，Intel UHD 630 + NVIDIA GTX 1660 Ti（Turing），4K OLED 内屏，Intel 9462 Wi-Fi，Realtek ALC1220 / RTL8111，64GB RAM。来源：仓库根 README。原版 EFI：`Monterey/EFI`。
 
+## 已知显示线路及待确认事项
+
+- **已确认（用户提供）：** 笔记本内置 4K OLED 屏幕可以使用 Intel UHD 630，也支持切换到 GTX 1660 Ti 进行图形渲染；机身**全部外接视频接口接 GTX 1660 Ti**。
+- **尚不能由“支持独显渲染”推断内屏同时物理直连双显卡。** 常见的 NVIDIA Optimus 模式是 GTX 1660 Ti 渲染后经 Intel UHD 630 扫描输出到内屏；另一种是主板存在硬件 MUX（或 Advanced Optimus），可将内屏输出链路切换至 NVIDIA。当前未核实神舟 Z7-CT7PRO 具体实现。
+- **macOS Tahoe 的意义：** NullMoth 驱动没有承诺实现 Optimus 跨 GPU 显示路径。因此若内屏只是 Optimus 渲染模式，即使 GTX 1660 Ti 可以做计算/渲染，也不能假定 macOS 内屏获得 NVIDIA Metal 加速。若确实具备独显直连 MUX，切换成功后才可能走 NVIDIA 内屏输出，但仍需实机验证驱动和面板兼容性。
+- **优先验收顺序：** 先保留核显/固件帧缓冲并让 Tahoe 安装器启动；再通过**物理直连 GTX 1660 Ti 的外接视频接口**测试 NullMoth 的视频输出和 Metal；最后核实 BIOS 或 Windows 控制面板是否有“混合/独显直连”开关、读取内屏显示拓扑并做真机切换测试。不能因想启用 NVIDIA 而直接禁用 Intel 核显。
+- **不预设 BIOS MUX 存在**，不将 Windows 下的“高性能 NVIDIA 处理器”应用级设置误写为硬件独显直连。
+
 ## 两套配置（以完全复制的原版 EFI 为基底）
 - `EFI-install/`：macOS 26 安装 / Recovery / 故障回退配置。取消原来用于屏蔽独显的 `SSDT-DGPU.aml`（置为 Disabled），移除 `disable-external-gpu` 属性；保留完整 SIP 与固件显示，使用 `-igfxvesa` 临时避免旧核显加速问题。不启用 NullMoth NVIDIA 驱动，不强行排除 `IONDRVSupport`。
 - `EFI-nvidia/`：**只在 Tahoe 已正常引导、用 1401 处理驱动且有已核验显示输出时试用**。加入 NullMoth 指定 NVIDIA 引导参数、弱化 SIP `csr-active-config=430A0000`、`SecureBootModel=Disabled`、添加 `IONDRVSupport` 的 kernel Block、`gfxrst=4`（与 WhateverGreen 同用）、`nvrmsettle=10000`（Turing 启动延迟）。该配置可能导致笔记本内屏黑屏，必须先从 U 盘验证，不能直接覆盖内部磁盘 EFI。
@@ -15,10 +23,10 @@
 1. 先备份能启动 Monterey 的 EFI 和 macOS 磁盘，保留一个独立的恢复 U 盘。
 2. 从官方 [OpenCorePkg releases](https://github.com/acidanthera/OpenCorePkg/releases) 更新 **OpenCore.efi、BOOTx64.efi、OpenRuntime.efi、OpenCanopy.efi 等配套 EFI 驱动**（核验下载发布包 checksum）。本文件编写时官方最新版本为 **1.0.8**，Tahoe 至少需要支持 macOS 26 的版本；不可混用老版本驱动。按新 Sample.plist 补齐新增配置项。
 3. 更新 Lilu、VirtualSMC 及其插件、WhateverGreen、AppleALC（本机原为定制版，先保留定制配置并评估迁移）、USBToolBox、UTBMap、VoodooPS2、RTL8111、NVMeFix、IntelBluetoothFirmware/BlueToolFixup/IntelBTPatcher 等。**原 itlwm.kext 必须替换成专门适配 Tahoe 的发行版**；找不到兼容版时先使用有线网络。不要假定旧二进制兼容 Tahoe。
-4. 保持原机 ACPI/USB/键盘/声卡路径，唯独禁用原本专门关独显的 SSDT-DGPU。检查设备属性中是否还有禁止独显的 SSDS/ACPI/PCI 设置，并在 Windows/Linux 真实读取 GTX 1660 Ti PCI ID、内屏 eDP 和 HDMI/DP 到底接核显还是独显。不要虚构 dGPU 直连线路或 BIOS MUX 开关。
+4. 保持原机 ACPI/USB/键盘/声卡路径，唯独禁用原本专门关独显的 SSDT-DGPU。检查设备属性中是否还有禁止独显的 SSDS/ACPI/PCI 设置，并在 Windows/Linux 真实读取 GTX 1660 Ti PCI ID、显示拓扑及是否有硬件 MUX。用户已确认所有外接视频口接 NVIDIA，以及内屏支持独显渲染；**内屏是否能直接切到独显输出仍待核实**。不要虚构 BIOS MUX 开关。
 5. 用 **对应 OpenCore 版本** 的 `ocvalidate` 检查两个 config.plist，用 `plutil -lint` 或 Python `plistlib` 解析校验；确认文件/驱动声明的路径和 Enabled、MinKernel 与实际一致，适用内核是 Darwin 25.x。
 6. BIOS 保持 UEFI/CSM 关闭、Secure Boot 关闭；NullMoth 推荐 Above 4G Decoding ON（笔记本 BIOS 不一定有此选项，**无该选项不要凭空修改固件**）。先保留默认 `ResizeGpuBars=-1`，别照抄其他主板 BAR 配置。
-7. 新版 Sonoma/Tahoe 对旧 Intel 集显驱动支持减弱，**内屏能显示不代表加速可用**。即使 GTX 1660 Ti ID 在驱动支持表里，项目明确声明**不实现 NVIDIA Optimus 显示 MUX**，不能保证这台笔记本内屏被 dGPU 加速。外接屏也必须按物理接线实际测试。
+7. 新版 Sonoma/Tahoe 对旧 Intel 集显驱动支持减弱，**内屏能显示不代表加速可用**。即使 GTX 1660 Ti ID 在驱动支持表里，项目明确声明**不实现 NVIDIA Optimus 显示 MUX**，不能保证这台笔记本内屏被 dGPU 加速。外接视频接口已确认直连 GTX 1660 Ti，但仍必须在 Tahoe 下验证信号输出与 Metal 加速。
 
 ## NVIDIA 驱动安装：不是把 kext 丢进 OC/Kexts
 项目：[nullmoth/nvidia-macos-driver](https://github.com/nullmoth/nvidia-macos-driver)；编写时最新 **v2.9（2026-11-10）**，支持 Tahoe 26 / Turing 系列，但官网 [CARD-SUPPORT](https://github.com/nullmoth/nvidia-macos-driver/blob/main/docs/CARD-SUPPORT.md) 中 Turing 的物理验证仍为 Pending。
@@ -40,4 +48,4 @@
 - [NullMoth 卡支持](https://github.com/nullmoth/nvidia-macos-driver/blob/main/docs/CARD-SUPPORT.md)
 - [NullMoth 排障及撤销](https://github.com/nullmoth/nvidia-macos-driver/blob/main/docs/TROUBLESHOOTING.md)
 
-**状态：针对原机型已作配置级变更并推送候选；未升级仓库里的 OpenCore/kext 二进制，未实机/安装器/显卡验收。请不要把本分支当作“开箱即用的 Tahoe EFI”。**
+**状态：针对原机型已作配置级变更并推送候选；未升级仓库里的 OpenCore/kext 二进制，未实机/安装器/显卡验收。请不要把本目录当作“开箱即用的 Tahoe EFI”。**
