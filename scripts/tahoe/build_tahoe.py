@@ -49,7 +49,7 @@ def release(repo,tmp,selector,tag=None):
     versions[repo]={"tag":r["tag_name"],"asset":a["name"]}
     return unzip(p,tmp/(repo.replace("/","_")+"_expanded"))
 def find(root,name):
-    matches=sorted([p for p in root.rglob(name) if p.name==name],key=lambda p:len(p.parts))
+    matches=sorted([p for p in root.rglob(name) if p.name==name and (p.is_file() if name=="ocvalidate" else True)],key=lambda p:len(p.parts))
     if not matches:raise FileNotFoundError(str(root)+"/"+name)
     return matches[0]
 def sync(old,sample):
