@@ -1,6 +1,23 @@
 # macOS Tahoe 26 / 神舟 Z7-CT7PRO / GTX 1660 Ti
 
-> **实验性 EFI 候选，未经真实硬件启动验证；不要覆盖现有 Monterey EFI。** 本目录保留仓库的 Monterey 基础文件用于升级，**其旧 OpenCore 和 Kext 二进制尚未更新，不能直接当作已验收的 Tahoe 启动盘**。安装前必须更新 OpenCore + kext 并执行 ocvalidate。
+> **已更新 OpenCore 1.0.8 和已列出的 Kext 二进制，且两套 EFI 均通过官方 ocvalidate 1.0.8 校验。** 这是可用于**恢复 U 盘首轮启动测试**的实验包，不是“所有硬件已经驱动”的保证。真正安装前先验证 BIOS、镜像及恢复手段；不要覆盖原 Monterey EFI。
+>
+> **重要兼容限制**：macOS Tahoe 26 移除了 AppleHDA，原 ALC1220 模拟音频没有随 EFI 获得直接支持；需要额外研究 VoodooHDA 或受控 AppleHDA 恢复。Intel 9462 Wi-Fi 使用 Tahoe 专用的第三方 alpha 驱动，蓝牙/睡眠/触摸板也必须实机测。UHD 630 内屏在 Tahoe 下不保证图形加速；GTX 1660 Ti 外屏必须装 NullMoth 后再测 Metal。
+
+## 2026-11-11 已构建 EFI：如何在神舟上使用
+
+**已完成并由 GitHub Actions 验证**：OpenCore 1.0.8 + 配套 BOOTx64/OpenRuntime/OpenCanopy/OpenLinuxBoot；Lilu 1.7.2、VirtualSMC 1.3.8、WhateverGreen 1.7.1、NVMeFix 1.1.3、VoodooPS2 2.3.7、USBToolBox 1.2.0、RealtekRTL8111 3.0.0、IntelBluetooth 2.4.0、BlueToolFixup 2.7.2、Tahoe AirportItlwm 2.4.0-alpha，以及 NVIDIA 配置使用的 AMFIPass 1.4.1。保留原机 UTBMap、ACPI 与 HfsPlus.efi，取消禁用 dGPU 的 SSDT/设备属性。实际版本和下载资产见 [DRIVER-VERSIONS.json](DRIVER-VERSIONS.json)。
+
+**拿到 USB 可用的完整目录**：
+- 直接下载 [Tahoe/EFI-install](EFI-install) 或 GitHub Actions 的 `Tahoe-Z7-CT7PRO-experimental` Artifact（包含 EFI-install.zip 与 EFI-nvidia.zip）。将 `EFI-install` **目录里面的 BOOT 与 OC 文件夹** 放入 USB 的 `EFI` 文件夹：最终应为 `EFI/BOOT/BOOTx64.efi` 和 `EFI/OC/config.plist`。**不可形成 EFI/EFI-install/OC**。
+- 准备一份**独立、未修改的 Monterey 恢复 EFI U 盘**。新系统最好装在另一块 SSD 或备份确认的独立分区；不要抹掉旧 Windows/Monterey 数据。
+- 先从 `EFI-install` 启动，在**内屏**尝试进入 Tahoe 安装器。此版使用 `-igfxvesa` 临时固件显示，UHD 630 不能假定已有 QE/CI，首次界面可能低性能。**此时不应安装 NVIDIA 系统驱动，也不能期待外接视频口在系统桌面工作。**
+- 如果 Tahoe 成功进入桌面：优先通过已知可用的网络方式准备 [1401 Mac 官方应用](https://github.com/nullmoth/nvidia-macos-driver/releases)；安装前备份当前正在使用的 EFI。由 1401 安装 NullMoth NVIDIA 最新正式驱动，并查看其对 OpenCore 的实际配置修改，允许系统扩展后重启。
+- 使用 NVIDIA 的启动设置后，连接一台已在 Windows 中验证的外接屏，从 1080p/60Hz 开始，读取 `kmutil showloaded --list-only | grep -i nullmoth` 和 `system_profiler SPDisplaysDataType`。排查黑屏时优先看官方 1401 Crash Report 和 GPU 日志。**不要盲目将 EFI-nvidia 直接复制到内置 SSD**；它是手动调试的对照版，以 1401 对实际启动分区的改动为准。
+- 首次引导后记录：内屏、外屏 HDMI/DP、核显、GTX 1660 Ti Metal、USB、I2C 触摸板、PS/2 键盘、Wi‑Fi、蓝牙、RJ45、麦克风、内置扬声器、耳机、睡眠/唤醒。任何未测条目均为“未知”，不能标注“已驱动”。
+- **重要**：原仓库的 `SystemUUID` 格式不能通过新 OC 验证，因此此 EFI 中已清空。首次正式使用前，必须在本机重新生成私有 SMBIOS 四项并检查；不要把 Serial/MLB/ROM/UUID 发到公开仓库。静态校验通过不代表开机必定成功。
+
+构建 CI：[GitHub Actions — Build Tahoe EFI](https://github.com/gawinwong/Hackintosh/actions/workflows/tahoe-efi.yml)。如果未来自动更新驱动失败，以最后一次成功构建的提交及 Artifact 为准。
 
 ## 实际硬件
 神舟战神 Z7-CT7PRO（PB50_70RFRDRC），Intel Core i7-9750H，Intel UHD 630 + NVIDIA GTX 1660 Ti（Turing），4K OLED 内屏，Intel 9462 Wi-Fi，Realtek ALC1220 / RTL8111，64GB RAM。来源：仓库根 README。原版 EFI：`Monterey/EFI`。
@@ -37,12 +54,12 @@
 
 两套沿用原版 `MacBookPro16,4` SMBIOS（Tahoe 支持的 2019 款 16 英寸 MBP）。**原仓库公开了机器标识信息**，实际联网使用时建议重新生成并保护 Serial/MLB/UUID/ROM，不要将新机三码提交到公开仓库。
 
-## 必须补齐的 OpenCore / kext 更新
+## 后续系统级兼容性与复验事项（OpenCore / Kext 已更新）
 1. 先备份能启动 Monterey 的 EFI 和 macOS 磁盘，保留一个独立的恢复 U 盘。
-2. 从官方 [OpenCorePkg releases](https://github.com/acidanthera/OpenCorePkg/releases) 更新 **OpenCore.efi、BOOTx64.efi、OpenRuntime.efi、OpenCanopy.efi 等配套 EFI 驱动**（核验下载发布包 checksum）。本文件编写时官方最新版本为 **1.0.8**，Tahoe 至少需要支持 macOS 26 的版本；不可混用老版本驱动。按新 Sample.plist 补齐新增配置项。
-3. 更新 Lilu、VirtualSMC 及其插件、WhateverGreen、AppleALC（本机原为定制版，先保留定制配置并评估迁移）、USBToolBox、UTBMap、VoodooPS2、RTL8111、NVMeFix、IntelBluetoothFirmware/BlueToolFixup/IntelBTPatcher 等。**原 itlwm.kext 必须替换成专门适配 Tahoe 的发行版**；找不到兼容版时先使用有线网络。不要假定旧二进制兼容 Tahoe。
+2. 已从官方 [OpenCorePkg 1.0.8](https://github.com/acidanthera/OpenCorePkg/releases) 获取 OpenCore、BOOTx64 与 EFI 驱动，并按 1.0.8 Sample.plist 同步配置，通过 ocvalidate。未来升级必须保持套件版本匹配，不混用旧 EFI 驱动。
+3. 已下载并纳入主流 Kext 的 Release 版本，旧 AppleALC 定制版**没有**注入 Tahoe EFI，因为 AppleHDA 已从 Tahoe 移除；模拟声卡需额外安装 VoodooHDA 或恢复 AppleHDA。旧 itlwm 已换成 Tahoe 专用 alpha AirportItlwm；如 Wi-Fi 不稳定则先使用有线网络，切勿当作已验证适配。
 4. 保持原机 ACPI/USB/键盘/声卡路径，唯独禁用原本专门关独显的 SSDT-DGPU。检查设备属性中是否还有禁止独显的 SSDS/ACPI/PCI 设置，并在 Windows/Linux 真实读取 GTX 1660 Ti PCI ID、显示拓扑及是否有硬件 MUX。用户已确认所有外接视频口接 NVIDIA，以及内屏支持独显渲染；**内屏是否能直接切到独显输出仍待核实**。不要虚构 BIOS MUX 开关。
-5. 用 **对应 OpenCore 版本** 的 `ocvalidate` 检查两个 config.plist，用 `plutil -lint` 或 Python `plistlib` 解析校验；确认文件/驱动声明的路径和 Enabled、MinKernel 与实际一致，适用内核是 Darwin 25.x。
+5. 已执行 OpenCore 1.0.8 `ocvalidate` 检查两个 config.plist，并以 Python plistlib 核验声明的 ACPI/Kext/UEFI 文件路径存在；实际安装仍需在 Darwin 25.x Tahoe 真机复验。
 6. BIOS 保持 UEFI/CSM 关闭、Secure Boot 关闭；NullMoth 推荐 Above 4G Decoding ON（笔记本 BIOS 不一定有此选项，**无该选项不要凭空修改固件**）。先保留默认 `ResizeGpuBars=-1`，别照抄其他主板 BAR 配置。
 7. 新版 Sonoma/Tahoe 对旧 Intel 集显驱动支持减弱，**内屏能显示不代表加速可用**。即使 GTX 1660 Ti ID 在驱动支持表里，项目明确声明**不实现 NVIDIA Optimus 显示 MUX**，不能保证这台笔记本内屏被 dGPU 加速。外接视频接口已确认直连 GTX 1660 Ti，但仍必须在 Tahoe 下验证信号输出与 Metal 加速。
 
@@ -66,4 +83,4 @@
 - [NullMoth 卡支持](https://github.com/nullmoth/nvidia-macos-driver/blob/main/docs/CARD-SUPPORT.md)
 - [NullMoth 排障及撤销](https://github.com/nullmoth/nvidia-macos-driver/blob/main/docs/TROUBLESHOOTING.md)
 
-**状态：针对原机型已作配置级变更并推送候选；未升级仓库里的 OpenCore/kext 二进制，未实机/安装器/显卡验收。请不要把本目录当作“开箱即用的 Tahoe EFI”。**
+**状态：OpenCore、Kext 二进制已构建并经 ocvalidate 静态校验通过；未真机启动、未在 Tahoe 安装器/显示器/显卡上验收。仅推荐先用 USB 测试，不能保证全部硬件驱动。**
