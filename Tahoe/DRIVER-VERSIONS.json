@@ -1,0 +1,50 @@
+{
+  "acidanthera/OpenCorePkg": {
+    "tag": "1.0.8",
+    "asset": "OpenCore-1.0.8-RELEASE.zip"
+  },
+  "acidanthera/Lilu": {
+    "tag": "1.7.2",
+    "asset": "Lilu-1.7.2-RELEASE.zip"
+  },
+  "acidanthera/VirtualSMC": {
+    "tag": "1.3.8",
+    "asset": "VirtualSMC-1.3.8-RELEASE.zip"
+  },
+  "acidanthera/WhateverGreen": {
+    "tag": "1.7.1",
+    "asset": "WhateverGreen-1.7.1-RELEASE.zip"
+  },
+  "acidanthera/NVMeFix": {
+    "tag": "1.1.3",
+    "asset": "NVMeFix-1.1.3-RELEASE.zip"
+  },
+  "acidanthera/VoodooPS2": {
+    "tag": "2.3.7",
+    "asset": "VoodooPS2Controller-2.3.7-RELEASE.zip"
+  },
+  "USBToolBox/kext": {
+    "tag": "1.2.0",
+    "asset": "USBToolBox-1.2.0-RELEASE.zip"
+  },
+  "Mieze/RTL8111_driver_for_OS_X": {
+    "tag": "v3.0.0",
+    "asset": "RealtekRTL8111-V3.0.0.zip"
+  },
+  "OpenIntelWireless/IntelBluetoothFirmware": {
+    "tag": "v2.4.0",
+    "asset": "IntelBluetooth-v2.4.0.zip"
+  },
+  "acidanthera/BrcmPatchRAM": {
+    "tag": "2.7.2",
+    "asset": "BrcmPatchRAM-2.7.2-RELEASE.zip"
+  },
+  "laobamac/itlwm": {
+    "tag": "v2.4.0-alpha",
+    "asset": "AirportItlwm-Tahoe-v2.4.0-RELEASE-alpha-7204c69.zip"
+  },
+  "AMFIPass": {
+    "tag": "1.4.1",
+    "source": "OCLP payload"
+  }
+}
