@@ -13,6 +13,24 @@
 - **优先验收顺序：** 先保留核显/固件帧缓冲并让 Tahoe 安装器启动；再通过**物理直连 GTX 1660 Ti 的外接视频接口**测试 NullMoth 的视频输出和 Metal；最后核实 BIOS 或 Windows 控制面板是否有“混合/独显直连”开关、读取内屏显示拓扑并做真机切换测试。不能因想启用 NVIDIA 而直接禁用 Intel 核显。
 - **不预设 BIOS MUX 存在**，不将 Windows 下的“高性能 NVIDIA 处理器”应用级设置误写为硬件独显直连。
 
+## 首要目标：修复外接显示器黑屏（GTX 1660 Ti 物理直连）
+
+**用户首要目标是 macOS Tahoe 26 的外接显示输出和 NVIDIA 图形加速，不是让内屏由 NVIDIA 驱动。** 已确认所有外接 HDMI/DP 等视频口物理接到 GTX 1660 Ti，而内屏由 Intel UHD 630 输出，Windows 的 NVIDIA 应用偏好仅代表 Optimus 渲染，并不证明存在 MUX。
+
+原 Monterey EFI 的 `SSDT-DGPU.aml` 和 `disable-external-gpu` 会屏蔽独显，旧系统连接外屏黑屏与此高度吻合。但**移除屏蔽并不自动解决 macOS 驱动问题**；Tahoe 需要安装、加载并实测 NullMoth 的 NVRM / NVRMFB / NVAccel / NVRMAGDC 系统扩展。它们安装在 `/Library/Extensions`，不是 OC/Kexts。
+
+为防止先前黑屏问题，必须落实以下顺序：
+
+1. **独立安装 U 盘**：`EFI-install` 用固件帧缓冲完成安装；保持 `IONDRVSupport` 未被排除；Booter→Quirks→`ResizeAppleGpuBars=0`、UEFI→Quirks→`ResizeGpuBars=-1` 是 NullMoth 建议的安装用设置。当前旧仓库 Booter 的 `ResizeAppleGpuBars=-1`，**必须在验证的新 OpenCore schema 下调整后才能试安装**。
+2. **更新引导二进制**：OpenCore / Lilu / VirtualSMC / WhateverGreen 等最新版及全部声明文件须完整同步，生成后用对应版本 `ocvalidate`。不能拿只改了 config 的旧 EFI 当成 Tahoe 成品。
+3. **先验证基础桌面，后安装 NVIDIA**：首轮测试内置屏与系统是否能操作，并提供远程管理或 Recovery 后路；内屏在 Tahoe 下没有加速也可能出现功能受限。
+4. **通过 1401 安装 NullMoth 最新正式版**，由其备份正在启动的 OpenCore、处理对应设置与四个系统 kext；特别核对 `AMFIPass.kext`，当前旧 EFI 中没有，不能漏掉；按提示允许扩展、重启。手工 NVIDIA 候选应只用于对照和故障分析。
+5. **先接外屏检查信号**：用原来在 Windows 下可正常工作的线材与视频口，优先 1080p/60 Hz 或低刷新率；记录 `system_profiler SPDisplaysDataType`、`kmutil showloaded --list-only | grep nullmoth`、OpenCore/WindowServer/GPU 日志、显示器是否被识别。若仅黑屏/闪烁，确认驱动版本以及 BAR、显示模式；可对照官方 `-nvrmnoflip` 故障参数，不要先在物理接线未知时乱改 Intel `AAPL,ig-platform-id`。
+6. **接受驱动的已知边界**：官方表示 Turing GTX 16 在支持范围，但 Turing 的物理验证仍标为 Pending；无真机结果不能保证 1660 Ti 的所有视频口和分辨率工作。2026-11 的驱动仍有 HDMI/DP 音频未正常工作的已知问题，视频出画面和显示器扬声器有声需分开验收。
+7. **保留回退**：始终保留原 Monterey EFI 与另一份恢复介质；1401 新版本自带从 OpenCore picker 临时关闭或移除 NVIDIA 驱动的入口，黑屏时优先使用官方回退办法。
+
+参考：[NullMoth README](https://github.com/nullmoth/nvidia-macos-driver/blob/main/README.md)、[安装/显示管线说明](https://github.com/nullmoth/nvidia-macos-driver/blob/main/docs/HOW-IT-WORKS.md)、[黑屏排障](https://github.com/nullmoth/nvidia-macos-driver/blob/main/docs/TROUBLESHOOTING.md)。
+
 ## 两套配置（以完全复制的原版 EFI 为基底）
 - `EFI-install/`：macOS 26 安装 / Recovery / 故障回退配置。取消原来用于屏蔽独显的 `SSDT-DGPU.aml`（置为 Disabled），移除 `disable-external-gpu` 属性；保留完整 SIP 与固件显示，使用 `-igfxvesa` 临时避免旧核显加速问题。不启用 NullMoth NVIDIA 驱动，不强行排除 `IONDRVSupport`。
 - `EFI-nvidia/`：**只在 Tahoe 已正常引导、用 1401 处理驱动且有已核验显示输出时试用**。加入 NullMoth 指定 NVIDIA 引导参数、弱化 SIP `csr-active-config=430A0000`、`SecureBootModel=Disabled`、添加 `IONDRVSupport` 的 kernel Block、`gfxrst=4`（与 WhateverGreen 同用）、`nvrmsettle=10000`（Turing 启动延迟）。该配置可能导致笔记本内屏黑屏，必须先从 U 盘验证，不能直接覆盖内部磁盘 EFI。
